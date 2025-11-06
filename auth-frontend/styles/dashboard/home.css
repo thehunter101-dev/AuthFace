@@ -1,0 +1,67 @@
+.content_avatar_img{
+    width: 12em;
+    height: 12em;
+    overflow: hidden;
+    border-radius: 100%;
+}
+
+.content_avatar_img img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.user_content_info{
+    display: flex;
+    align-items: center;
+    gap: 1em;
+}
+
+.extra_content{
+    display: flex;
+    justify-content: space-around;
+    align-content: center;
+    padding: 2em;
+    background-color: #D9D9D9;
+    border-radius: 1em;
+}
+
+.button_content{
+    display: flex;
+    align-items: center;
+}
+
+.backup_head{
+    padding: 1em 4em 0.2em 4em;
+    background-color: #BBB5B5;
+    border-radius: 1em;
+    text-align: center;
+}
+
+.backup_content{
+    border-radius: 1em;
+    background-color:#9F9F9F;
+}
+
+.button_content button{
+    background-color: #000000;
+    color: white;
+    border: none;
+    border-radius: 0.5em;
+}
+
+.backup_buttons{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2em;
+    padding: 2em;
+}
+
+.backup_buttons button{
+    border: #414141;
+    background-color: #414141;
+    color: white;
+    border-radius: 0.5em;
+}

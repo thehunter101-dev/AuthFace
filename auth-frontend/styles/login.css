@@ -1,0 +1,44 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-image: url('/public/fondo.jpg');
+    background-size: cover;
+}
+
+input {
+    background-color: rgba(187, 187, 187, 0.2)
+}
+
+.card {
+    width: 28em;
+    background-color: rgba(187, 187, 187, 0.2);
+    padding: 4em;
+    border-radius: 1.5em;
+    border:solid 1px white;
+    backdrop-filter: blur(10px);
+}
+
+.card_link{
+    text-align: center;
+}
+
+.card_title{
+text-align: center;
+}
+
+
+.background {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 84%;
+}
+
+.navbar {
+    background-color: #13161E;
+}
+
+.navbar img {
+    width: 8em;
+}
+

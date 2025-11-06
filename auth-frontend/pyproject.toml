@@ -1,0 +1,23 @@
+[project]
+name = "authfront"
+version = "0.1.0"
+description = "Frontend usando Fasthml"
+authors = [
+    {name = "Thehunter101",email = "thehunter121@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "python-fasthtml (>=0.12.29,<0.13.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[dependency-groups]
+dev = [
+    "black (>=25.9.0,<26.0.0)",
+    "pyright (>=1.1.406,<2.0.0)"
+]
