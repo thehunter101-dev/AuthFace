@@ -1,11 +1,12 @@
 import base64
 import json
+from django.http import response
 from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework import status
 from django.core.files.base import ContentFile
-from .opencv_module import generar_embeddings
+from .opencv_module import generar_embeddings, comparar_rostros, encode_embedding
 from .models import Biometria
 from django.contrib.auth.models import User
 # Create your views here.
@@ -41,3 +42,22 @@ class BionmetriaView(APIView):
         embeding_prom_save = Biometria(user = user,embedding=embeding_prom)
         embeding_prom_save.save()
         return Response({"mensaje":f"Rostro guardado"})
+
+class BiometriacheckView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        # Aquí recibirás los datos enviados desde la extensión
+        image_data = request.data.get("image")
+        embeding_p = Biometria.objects.get(user=request.user).embedding
+        if not image_data:
+            return Response({"error": "No se envió la imagen"}, status=400)
+        format, imgstr = image_data.split(';base64')
+        ext = format.split('/')[-1]
+        data_bytes = base64.b64decode(imgstr)
+        rostro = ContentFile(base64.b64decode(imgstr),name=f"captura_0.{ext}")
+        embeding_n = encode_embedding(ContentFile(data_bytes, name=f"captura_0.{ext}"))
+        verificacion = comparar_rostros(embeding_n,embeding_p)
+        if verificacion:
+        # Ejemplo: siempre autorizado (solo para test)
+            return Response({"message": "Biometría verificada"})

@@ -38,8 +38,8 @@ app.static_route_exts('/public','/public')
 app.static_route_exts('/styles','/styles')
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
-@rt("/auth/login",'post')
-async def loin(req):
+@rt("/auth/login")
+async def post(req):
     data = await req.form()
     username = data['username']
     password = data['password']
@@ -56,6 +56,10 @@ async def loin(req):
             return response
         return Main(H1('No estas cumeado!!!'),NotStr('<div class="tenor-gif-embed" data-postid="18173140706170597575" data-share-method="host" data-aspect-ratio="1" data-width="100%"><a href="https://tenor.com/view/bocchi-the-rock-gif-18173140706170597575">Bocchi The Rock Sticker</a>from <a href="https://tenor.com/search/bocchi+the+rock-stickers">Bocchi The Rock Stickers</a></div> <script type="text/javascript" async src="https://tenor.com/embed.js"></script>'),cls='container',style='width:30em')
 
+@rt("/auth/token")
+def get(req):
+    token = req.cookies.get("access_token")
+    return {"token":token}
 
 
 

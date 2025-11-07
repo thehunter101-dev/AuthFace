@@ -2,6 +2,7 @@ import numpy as np
 import cv2
 from PIL import Image
 import insightface
+from numpy.linalg import norm
 
 # Inicializamos el modelo globalmente para no cargarlo cada vez
 model = insightface.app.FaceAnalysis(name="buffalo_l")  # Modelo base de InsightFace
@@ -43,3 +44,23 @@ def generar_embeddings(rostros):
     embedding_prom = np.mean(np.array(embeddings),axis=0)
 
     return embedding_prom.tolist()
+
+
+
+def normalize_embedding(embedding):
+    """
+    Normaliza un embedding a longitud 1 (unitario)
+    """
+    embedding = np.array(embedding)
+    return embedding / norm(embedding)
+
+def comparar_rostros(embedding_nuevo, embedding_guardado, umbral=0.8):
+    """
+    Compara dos embeddings normalizados usando distancia Euclidiana
+    """
+    emb_n = normalize_embedding(embedding_nuevo)
+    emb_g = normalize_embedding(embedding_guardado)
+    
+    distancia = norm(emb_n - emb_g)
+    match = distancia < umbral
+    return match

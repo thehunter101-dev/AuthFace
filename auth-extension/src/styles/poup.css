@@ -1,0 +1,10 @@
+body {
+  width: 420px;   /* Ancho del popup */
+  height: 300px;  /* Alto del popup */
+  margin: 0;
+  padding: 1rem;
+}
+
+.danger{
+    color:red;
+}
