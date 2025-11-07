@@ -24,7 +24,7 @@ class UserInfo(APIView):
         return Response({"username":user.username,"email":user.email})
 
 class BionmetriaView(APIView):
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
     def post(self,request):
         imgs = request.data.get("rostros",[])
         rostros = []
@@ -37,7 +37,7 @@ class BionmetriaView(APIView):
             rostro = ContentFile(base64.b64decode(imgstr),name=f"captura_{i}.{ext}")
             rostros.append(rostro)
 
-        user = User.objects.get(username="admin")
+        user = User.objects.get(username=request.user.username)
         embeding_prom = generar_embeddings(rostros)
         embeding_prom_save = Biometria(user = user,embedding=embeding_prom)
         embeding_prom_save.save()
