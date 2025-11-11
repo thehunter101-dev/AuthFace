@@ -16,6 +16,7 @@ class Biometria(models.Model):
     Puede asociarse posteriormente a varios sitios.
     """
     bioId = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=100, blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='biometrias')
     embedding = models.JSONField()
 

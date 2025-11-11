@@ -2,10 +2,11 @@ from fasthtml.common import *
 from dataclasses import dataclass
 
 class Layout:
-    def __init__(self,titulo,css,body):
+    def __init__(self,titulo,css,scripts,body):
         self.titulo = titulo
         self.css = css
         self.body=body
+        self.scripts=scripts
 
     def render(self):
         return Html(
@@ -20,8 +21,9 @@ class Layout:
                     href="/styles/index.css"
                 ),
                 *[(Link(rel="stylesheet",href=content)) for content in self.css],
+                *[(Script(src=content)) for content in self.scripts],
             ),
-            Body(Div(Img(src="/public/logo.png"), cls="navbar"),self.body),
+            Body(Div(Img(src="public/logo.png"), cls="navbar"),self.body),
         )
 
 
@@ -45,13 +47,14 @@ class Dashboard(Layout):
                 *[(Link(rel="stylesheet",href=content)) for content in self.css],
                 htmxsrc,
                 Script(src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.26/webcam.min.js"),
+                Script(src='https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js'),
                 Script('let rostros = []')
             ),
             Body(
                 Div(
                     Div(
                         Section(
-                            Div(Img(src="/public/avatar.jpg", cls="img_avatar"),cls='avatar_img'),
+                            Div(Img(src="public/avatar.jpg", cls="img_avatar"),cls='avatar_img'),
                             Div(
                                 H2("",id="h2username"),
                                 P(""),
@@ -91,11 +94,11 @@ class Dashboard(Layout):
                         cls="left_bar"
                     ),
                     Div(
-                        Div(Img(src="/public/logo.png"), cls="navbar"),
+                        Div(Img(src="public/logo.png"), cls="navbar"),
                         Div(self.body),
                         cls="contenedor"
                     ),
                     cls="main"
-                )
+                ),
             )
         )

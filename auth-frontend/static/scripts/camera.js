@@ -1,7 +1,7 @@
 rostros = []
 const snapB = document.getElementById("snapB")
 let snapeable = false
-
+const access_token = Cookies.get("access_token")
 Webcam.attach('#camara');
 function take_snapshot() {
     Webcam.snap(function (data_uri) {
@@ -14,7 +14,8 @@ function send_snapshots() {
         fetch("http://localhost:8000/auth/img/post", {
             method: "POST",
             headers: {
-                "Content-type": "application/json"
+                'Authorization':'Bearer ' + access_token,
+                "Content-type": "application/json",
             },
             body: JSON.stringify(
                 {rostros: rostros}

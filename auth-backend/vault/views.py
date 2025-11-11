@@ -1,15 +1,16 @@
 import base64
-import json
-from django.http import response
 from rest_framework.views import APIView
-from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.permissions import AllowAny, IsAdminUser, IsAuthenticated
+from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework import status
 from django.core.files.base import ContentFile
+from vault.serializers import UserSerializer
 from .opencv_module import generar_embeddings, comparar_rostros, encode_embedding
 from .models import Biometria
 from django.contrib.auth.models import User
 # Create your views here.
+
 class ProtectedView(APIView):
     permission_classes = [IsAuthenticated]
 
@@ -22,6 +23,16 @@ class UserInfo(APIView):
         user = request.user
         print(user)
         return Response({"username":user.username,"email":user.email})
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+    def get_permissions(self):
+        if self.action == 'create':
+            return [AllowAny()]
+        return [IsAdminUser()]
+
 
 class BionmetriaView(APIView):
     permission_classes = [IsAuthenticated]
@@ -61,3 +72,4 @@ class BiometriacheckView(APIView):
         if verificacion:
         # Ejemplo: siempre autorizado (solo para test)
             return Response({"message": "Biometría verificada"})
+        else: return Response({"message":"Biometria incorrecta"})

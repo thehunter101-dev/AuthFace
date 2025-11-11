@@ -1,7 +1,7 @@
 body {
     margin: 0;
     padding: 0;
-    background-image: url('/public/fondo.jpg');
+    background-image: url('/register/public/fondo.jpg');
     background-size: cover;
 }
 
@@ -10,7 +10,7 @@ input {
 }
 
 .card {
-    width: 28em;
+    width: 26em;
     background-color: rgba(187, 187, 187, 0.2);
     padding: 4em;
     border-radius: 1.5em;
@@ -27,11 +27,11 @@ text-align: center;
 }
 
 
-.background {
+.container-fluid {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 84%;
+    height: calc(100vh - 62px);
 }
 
 .navbar {
@@ -39,6 +39,6 @@ text-align: center;
 }
 
 .navbar img {
-    width: 8em;
+    width: 100px;
 }
 
