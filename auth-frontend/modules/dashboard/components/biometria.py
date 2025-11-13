@@ -24,7 +24,7 @@ def get():
         ),
         Script(src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.26/webcam.min.js"),
         Script(src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"),
-        Script(src="/scripts/camera.js?==v2"),
+        Script(src="/scripts/camera.js?==v3"),
         cls="contenido",
         id="body_contenido",
         style="display:flex;flex-direction:column;justify-content:center;align-items:center;gap:2em;"

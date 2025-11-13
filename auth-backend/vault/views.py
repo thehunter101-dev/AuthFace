@@ -1,6 +1,6 @@
 import base64
 from rest_framework.views import APIView
-from rest_framework.permissions import AllowAny, IsAdminUser, IsAuthenticated
+from rest_framework.permissions import AllowAny, IsAdminUser, IsAuthenticated,BasePermission
 from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework import status
@@ -22,7 +22,12 @@ class UserInfo(APIView):
     def get(self,request):
         user = request.user
         print(user)
-        return Response({"username":user.username,"email":user.email})
+        return Response({"username":user.username,"email":user.email,"id":user.id})
+
+class IsOwnerOrAdmin(BasePermission):
+    def has_object_permission(self, request, view, obj):
+        return obj == request.user or request.user.is_staff
+
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
@@ -30,9 +35,12 @@ class UserViewSet(viewsets.ModelViewSet):
 
     def get_permissions(self):
         if self.action == 'create':
-            return [AllowAny()]
-        return [IsAdminUser()]
-
+            permission_classes = [AllowAny]
+        elif self.action in ['destroy', 'update', 'partial_update']:
+            permission_classes = [IsAuthenticated, IsOwnerOrAdmin]
+        else:
+            permission_classes = [IsAuthenticated]
+        return [permission() for permission in permission_classes]
 
 class BionmetriaView(APIView):
     permission_classes = [IsAuthenticated]

@@ -27,7 +27,7 @@ function send_snapshots() {
     }
 }
 
-Promise.all([faceapi.nets.tinyFaceDetector.loadFromUri('/static/models')]).then(startDetection);
+Promise.all([faceapi.nets.tinyFaceDetector.loadFromUri('/models')]).then(startDetection);
 
 
 async function startDetection() {
