@@ -7,6 +7,12 @@ Sistema de autentificacion mediante reconocimiento facial.
 - AuthExtension una extencion de navegador que bloquea los inicios de sesion al menos que sea verificado con reconocimiento facial.
 
 # Instalar dependencias
+Para la instalacion de las dependencias debe ejecutar estos scripts:
+## Linux
+Para linux solo ejecute install.sh, secreara el entorno y instalara las dependencias necesarias.
+
+## Windows
+Cooming soon
 
 # Ejecutar
-
+Hay que mejorar el script de start.sh
