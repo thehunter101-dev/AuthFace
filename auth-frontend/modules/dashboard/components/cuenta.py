@@ -46,7 +46,7 @@ def get(req):
             H3("Informacion del Usuario"),
             Hr(),
             Div(
-                Div(Img(src="public/avatar.jpg"), cls="content_avatar_img"),
+                Div(Img(src="public/user.png"), cls="content_avatar_img"),
                 Div(
                     H4(
                         "Nombre de Usuario: ",
@@ -80,10 +80,11 @@ def get(req):
             H3("Extras", style="margin-top:1em;"),
             Hr(),
             Div(
-                Div(Button("Iniciar con dato biometrico"), cls="button_content"),
+                #Div(Button("Iniciar con dato biometrico"), cls="button_content"),
                 Div(
                     Div(H5("Copia de seguridad", cls="body_text"), cls="backup_head"),
-                    Div(Button("Local"), Button("Nube"), cls="backup_buttons"),
+                    Div(Button("Local",id="buttonLocal"), Button("Nube",id="buttonCloud"), cls="backup_buttons"),
+                    Div(id="drive_status"),
                     cls="backup_content",
                 ),
                 cls="extra_content",
@@ -91,7 +92,7 @@ def get(req):
             Div(id="model_insert"),
             cls="container",
         ),
-        Script(src="/scripts/home.js?==v2"),
+        Script(src="/scripts/home.js"),
         cls="contenido",
         id="body_contenido",
     )

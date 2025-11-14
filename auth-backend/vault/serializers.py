@@ -1,6 +1,9 @@
 
 from django.contrib.auth.models import User
+from pydantic import fields
 from rest_framework import serializers
+
+from vault.models import Biometria
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -22,3 +25,12 @@ class UserSerializer(serializers.ModelSerializer):
             instance.set_password(password)
         instance.save()
         return instance
+
+class BiometriaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Biometria
+        fields = ['bioId','user','name','embedding']
+        extra_kwargs = {
+            'name':{'required':False, 'allow_blank':True}
+        }
+

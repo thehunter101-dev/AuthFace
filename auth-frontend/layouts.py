@@ -61,17 +61,14 @@ class Dashboard(Layout):
                     src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"
                 ),
                 Script(src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"),
-                Script("""
-                let rostros = [] 
-                """
-                ),
+                Script(src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"),
             ),
             Body(
                 Div(
                     Div(
                         Section(
                             Div(
-                                Img(src="public/avatar.jpg", cls="img_avatar"),
+                                Img(src="public/user.png", cls="img_avatar"),
                                 cls="avatar_img",
                             ),
                             Div(H2("", id="h2username"), P(""), cls="avatar_name"),
@@ -84,19 +81,22 @@ class Dashboard(Layout):
                                     hx_get="/dashboard/home",
                                     hx_target="#body_contenido",
                                     hx_swap="outerHTML",
+                                    id="LiInicio"
                                 ),
                                 Li(
                                     A(Div(H4("Biometria"), cls="item_select")),
                                     hx_get="/dashboard/biometria",
                                     hx_target="#body_contenido",
                                     hx_swap="outerHTML",
+                                    id="LiBiometria"
                                 ),
-                                Li(A(Div(H4("Sitios"), cls="item_select"))),
+                                #Li(A(Div(H4("Sitios"), cls="item_select"))),
                                 Li(
                                     A(Div(H4("Cuenta"), cls="item_select")),
                                     hx_get="/dashboard/cuenta",
                                     hx_target="#body_contenido",
                                     hx_swap="outerHTML",
+                                    id="LiCuenta"
                                 ),
                             ),
                             cls="menu",
@@ -111,7 +111,12 @@ class Dashboard(Layout):
                     cls="main",
                 ),
                 Script(f"Cookies.set('backendURI','{os.getenv('BACKEND_URI')}')"),
-                Script(src="/scripts/dashboard.js"),
+                NotStr("""
+                <script async defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()"></script>
+                <script async defer src="https://accounts.google.com/gsi/client" onload="gisLoaded()"></script>
+                
+                
+                """),
                 *[(Script(src=content)) for content in self.scripts],
             ),
         )

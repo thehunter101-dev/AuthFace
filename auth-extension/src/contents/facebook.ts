@@ -6,7 +6,7 @@ from "plasmo"
 
 // Configuración: inyectar en todas las páginas
 export const config: PlasmoCSConfig = {
-    matches: ["https://www.facebook.com/*"],
+    matches: ["https://www.facebook.com","https://www.facebook.com/?locale=es_LA"],
     all_frames: true,
     world: "MAIN" // para poder acceder al window principal
 }

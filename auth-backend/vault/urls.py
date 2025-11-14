@@ -5,10 +5,11 @@ from rest_framework_simplejwt.views import(
     TokenRefreshView
 )
 from rest_framework.routers import DefaultRouter
-from .views import ProtectedView, BionmetriaView, UserInfo, BiometriacheckView, UserViewSet
+from .views import BiometriaViewSet, ProtectedView, BionmetriaView, UserInfo, BiometriacheckView, UserViewSet
 
 router = DefaultRouter()
 router.register(r'users',UserViewSet,basename='user')
+router.register(r"biometria",BiometriaViewSet,basename="biometria")
 
 urlpatterns = [
     path('token/', TokenObtainPairView.as_view(),name='token_optain_pair'),

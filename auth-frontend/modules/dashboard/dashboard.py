@@ -15,5 +15,5 @@ dashboardModule, rt = fast_app(routes=routes,before=beforeware)
 @rt("/")
 def get():
     body= home.homeReturn()
-    dashboard = Dashboard("Home",['/styles/dashboard/home.css'],[''],body).render()
+    dashboard = Dashboard("Home",['/styles/dashboard/home.css'],['/scripts/dashboard.js'],body).render()
     return dashboard

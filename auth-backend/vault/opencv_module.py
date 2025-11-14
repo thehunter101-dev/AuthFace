@@ -63,4 +63,5 @@ def comparar_rostros(embedding_nuevo, embedding_guardado, umbral=0.8):
     
     distancia = norm(emb_n - emb_g)
     match = distancia < umbral
+    print(match)
     return match
